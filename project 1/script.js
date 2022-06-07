@@ -1,4 +1,4 @@
-
+console.log("asad");
 ///retriving html elements from dom
 const form=document.getElementById('form');
 const username=document.getElementById('username');
@@ -37,13 +37,17 @@ if (re.test(input.value.trim())){
 function checkRequired(inputArray){
     inputArray.forEach(function(input){
         if( input.value === " "){
-        showError(input,`${input.id} is required`);
+        showError(input,`${getFieldId(input)} is required`);
         }else {
             showSuccess(input);
         }
         
     });
 }
+function getFieldId(input) {
+    return input.id.charAt(0).toUpperCase()+ input.id.slice(1);
+}
+
 function checkLength(input, min , max) {
     if( input.value.length < min ){
         showError( input, `${getFieldId(input)} needs to be at least ${min} characters` );
@@ -58,8 +62,6 @@ function checkPasswordMatch(input1,input2){
     showError( input2,"password does not match")
 }
 
-function getFieldId(input) {
-    return input.id.charAt(0).toUpperCase()+ input.id.slice(1);
 }
 
 //////event listener
@@ -72,5 +74,4 @@ form.addEventListener('submit',function(e){
     checkLength(password,6,30);
     checkEmail(email);
     checkPasswordMatch(password,password2);
-}
-)};
+});
